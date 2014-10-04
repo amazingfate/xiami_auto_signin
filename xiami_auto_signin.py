@@ -6,13 +6,10 @@ import re
 login_url = 'http://www.xiami.com/web/login'
 
 login_data = urllib.urlencode({
-    'email': '740230453@qq.com',
-    'password': 'wilson1950',
-    #'登录'的utf-8编码
-    'LoginButton': '\xe7\x99\xbb\xe9\x99\x86',
+    'email': 'your email',
+    'password': 'your password',
+    'LoginButton': '登录',
 })
-
-login_data = login_data.decode('utf-8')
 
 login_headers = {
     'Referer': 'http://www.xiami.com/web',
