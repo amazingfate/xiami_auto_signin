@@ -36,13 +36,6 @@ def days(headers_url,checkin_url):
         'User-Agent': 'chrome/35.0'}
     checkin_request = urllib2.Request(checkin_url, None, checkin_headers)
     checkin_response = urllib2.urlopen(checkin_request).read()
-    # try:
-    #     checkin_response = urllib2.urlopen(checkin_request).read().decode('utf-8').encode('gbk')
-    # except:
-    #     pass
-    # with open('xiami.html','w') as f:
-    #     f.write(checkin_response)
-    # f.close()
 
     # 检查签到结果
     days_pattern = re.compile(r'已连续签到(\d+)天')
