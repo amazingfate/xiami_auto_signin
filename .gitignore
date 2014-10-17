@@ -13,4 +13,5 @@ build
 
 # My configurations:
 ENV/
-*.html
+pic
+xiami/

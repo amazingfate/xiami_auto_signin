@@ -23,7 +23,7 @@ def login(email, pw):
     login_request = urllib2.Request(login_url, login_data, login_headers)
     login_response = urllib2.urlopen(login_request).read()
 
-    if 'email或者密码错误' in login_response:
+    if 'email或者密码错误'or'email 不存在' in login_response:
         return 0
     else:
         return days('http:www.xiami.com/profile', 'http://www.xiami.com/web')
