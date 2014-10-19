@@ -21,3 +21,11 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.email
+
+class OperatorDB:
+    def updata_valid(self,uid,uvalid):
+        user=User.query.filter_by(id=uid).first()
+        user.valid=uvalid
+        db.session.commit()
+
+OperatorDB=OperatorDB()

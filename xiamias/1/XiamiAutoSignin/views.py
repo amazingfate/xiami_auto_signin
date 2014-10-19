@@ -2,12 +2,12 @@
 # encoding=utf-8
 from flask import render_template, request, jsonify, json,g
 from XiamiAutoSignin import app,db
-from models import User
+from models import User,OperatorDB
 from checkin import checkin_status
+
 
 @app.before_request
 def before_request():
-    #appinfo = sae.core.Application()
     g.db= db
 
 @app.teardown_request
@@ -25,9 +25,6 @@ def checkin():
         data = json.loads(request.form.get('data'))
         email = data['email']
         pw = data['password']
-        print email
-        print pw
-
         status = checkin_status(email, pw)
         user = User.query.filter_by(email=email).first()
         if user:
@@ -47,8 +44,6 @@ def checkin():
                 g.db.session.add(user)
                 g.db.session.commit()
                 status['content'] = u'登记成功，已签到%s天' % user.days
-
-        print status
         return jsonify(result=status)
 
 
@@ -67,8 +62,7 @@ def task():
             if user[i].valid == True:
                 c_status = checkin_status(user[i].email, user[i].password)
                 if c_status['state'] == 'error':
-                    user.valid = False
-                    g.db.commit()
+                    OperatorDB.updata_valid(user[i].id,False)
                 status = {'id': i + 1,
                           'email': user[i].email,
                           'state': c_status['state'],

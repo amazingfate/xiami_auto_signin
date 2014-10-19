@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import sae
 from XiamiAutoSignin import app
 
-if __name__ == '__main__':
-	app.run()
+application = sae.create_wsgi_app(app)
