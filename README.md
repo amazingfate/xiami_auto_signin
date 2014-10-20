@@ -21,11 +21,11 @@ LINK：[虾米自动签到](http://www.xiamias.sinaapp.com)
 
 ##其他
 
-XiamiAutoSignin文件可以独立实现虾米账号的签到，只需要在文件结尾加上：
+XiamiAutoSignin文件夹里的checkin.py文件可以独立实现虾米账号的签到，只需要在文件结尾加上：
 
     checkin_status(your email,your password)
     
- 就能实现签到功能
+就能实现签到功能
 
 ##TO DO
 
