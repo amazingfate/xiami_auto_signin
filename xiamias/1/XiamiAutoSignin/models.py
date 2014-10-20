@@ -23,6 +23,12 @@ class User(db.Model):
         return '<User %r>' % self.email
 
 class OperatorDB:
+    def query_all(self):
+        return User.query.all()
+
+    def filter_email(self,em):
+        return User.query.filter_by(email=em).first()
+
     def updata_valid(self,uid,uvalid):
         user=User.query.filter_by(id=uid).first()
         user.valid=uvalid

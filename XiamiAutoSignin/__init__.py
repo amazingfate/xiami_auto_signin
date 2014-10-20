@@ -1,11 +1,13 @@
 #_*_conding:utf-8_*_
-from flask import Flask
 from flaskext.sqlalchemy import SQLAlchemy
-from config import SQLALCHEMY_DATABASE_URI
+from flask import Flask
+from setting import MYSQL_USER,MYSQL_PASS,MYSQL_HOST_M,MYSQL_HOST_S,MYSQL_PORT,MYSQL_DB
 
 app=Flask(__name__)
-# app.config.from_object('config')
-app.config['SQLALCHEMY_DATABASE_URI']=SQLALCHEMY_DATABASE_URI
+app.debug=True
+
+app.secret_key = 'k4hp8ri1ng$@nbwqk+(fhdshgn9sR~XHH!jmN]LWX/,?RT'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://%s:%s@%s:%s/%s?charset=utf8' % (MYSQL_USER,MYSQL_PASS,MYSQL_HOST_M,MYSQL_PORT,MYSQL_DB)
 
 class nullpool_SQLAlchemy(SQLAlchemy):
 	def apply_driver_hacks(self, app, info, options):
@@ -14,9 +16,9 @@ class nullpool_SQLAlchemy(SQLAlchemy):
 		options['poolclass'] = NullPool
 		del options['pool_size']
 
-db= nullpool_SQLAlchemy(app)
 
-#db= SQLAlchemy(app)
+db=nullpool_SQLAlchemy(app)
+
 
 import views,models
 

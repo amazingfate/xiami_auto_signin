@@ -14,6 +14,10 @@ def before_request():
 def teardown_request(exception):
     if hasattr(g,'db') : g.db.session.close()
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -26,7 +30,7 @@ def checkin():
         email = data['email']
         pw = data['password']
         status = checkin_status(email, pw)
-        user = User.query.filter_by(email=email).first()
+        user=OperatorDB.filter_email(email)
         if user:
             # 已经登记过
             if status['state'] == u'success':
@@ -54,27 +58,30 @@ def task():
     status = {'id': '', 'email': '', 'state': '',
               'content': '', 'valid': '', 'tr_class': ''}
 
-    user = User.query.all()
+    user = OperatorDB.query_all()
     if user:
         user_len = len(user)
         for i in xrange(user_len):
             # 只登陆有效的账号
             if user[i].valid == True:
                 c_status = checkin_status(user[i].email, user[i].password)
-                if c_status['state'] == 'error':
+                if u'密码错误' in c_status['state']:
                     OperatorDB.updata_valid(user[i].id,False)
-                status = {'id': i + 1,
-                          'email': user[i].email,
-                          'state': c_status['state'],
-                          'content': u'已经签到%s天' % c_status['content'],
-                          'valid': u'有效',
-                          'tr_class': 'success'}
+                elif u'验证码' in c_status['state']:
+                    break
+                else:
+                    status = {'id': i + 1,
+                              'email': user[i].email,
+                              'state': c_status['state'],
+                              'content': u'已经签到%s天' % c_status['content'],
+                              'valid': u'有效',
+                              'tr_class': 'success'}
             else:
                 status = {'id': i + 1,
                           'email': user[i].email,
                           'state': u'失效',
                           'content': u'登记失效',
                           'valid': u'无效',
-                          'tr_class': 'error'}
+                          'tr_class': 'danger'}
             message.append(status)
     return render_template('task.html', user_len=user_len, message=message)
