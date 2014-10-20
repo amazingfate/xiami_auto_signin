@@ -1,10 +1,10 @@
 #喻建伟
-北京科技大学天津学院 | 应届毕业生 | 男 | 22岁
-专业：电子信息工程
-电话：13146690475
-邮箱：Y_JW@outlook.com
-Github：https://github.com/jianguiqubaa
-期望职位：python初级程序员/web开发
+- 北京科技大学天津学院 | 应届毕业生 | 男 | 22岁
+- 专业：电子信息工程
+- 电话：13146690475
+- 邮箱：Y_JW@outlook.com
+- Github：https://github.com/jianguiqubaa
+- 期望职位：python初级程序员/web开发
 
 ##  技能清单
 
@@ -20,7 +20,7 @@ Github：https://github.com/jianguiqubaa
 
 ###虾米自动签到（2014）
 
- - 网站地址：www.xiamias.sinaapp.com
+ - 网站地址：http://www.xiamias.sinaapp.com
  - 使用python的urllib和urllib2模块模拟登陆，签到
  - 网站后台使用flask框架搭建而成，运行于sae平台。
  - 使用sqlalchemy连接mysql，并且使用了flask-sqlalchemy扩展
