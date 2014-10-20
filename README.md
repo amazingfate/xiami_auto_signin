@@ -31,3 +31,4 @@ XiamiAutoSignin文件夹里的checkin.py文件可以独立实现虾米账号的�
 
 - 完善后台管理功能
 - 验证码问题
+- 邮件通知
