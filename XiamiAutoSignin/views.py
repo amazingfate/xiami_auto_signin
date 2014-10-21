@@ -4,7 +4,10 @@ from flask import render_template, request, jsonify, json,g
 from XiamiAutoSignin import app,db
 from models import User,OperatorDB
 from checkin import checkin_status
+import re
+import sys
 
+sys.setdefaultencoding('utf-8')
 
 @app.before_request
 def before_request():
@@ -57,7 +60,6 @@ def task():
     user_len = 0
     status = {'id': '', 'email': '', 'state': '',
               'content': '', 'valid': '', 'tr_class': ''}
-
     user = OperatorDB.query_all()
     if user:
         user_len = len(user)
@@ -65,11 +67,12 @@ def task():
             # 只登陆有效的账号
             if user[i].valid == True:
                 c_status = checkin_status(user[i].email, user[i].password)
-                if u'密码错误' in c_status['state']:
+                if re.match(r'密码',str(c_status['content'])):
                     OperatorDB.updata_valid(user[i].id,False)
-                elif u'验证码' in c_status['state']:
+                elif re.match(r'验证码',str(c_status['content'])):
                     break
                 else:
+                    OperatorDB.udata_days(user[i].id,c_status['content'])
                     status = {'id': i + 1,
                               'email': user[i].email,
                               'state': c_status['state'],
