@@ -11,3 +11,8 @@ libraries:
 
 - name: flask-sqlalchemy
   version: "0.15"
+
+cron:
+- description: auto_checkin
+  url: /task
+  schedule: "37 1 * * *"
