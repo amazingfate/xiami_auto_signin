@@ -6,7 +6,7 @@ from setting import MYSQL_USER,MYSQL_PASS,MYSQL_HOST_M,MYSQL_HOST_S,MYSQL_PORT,M
 app=Flask(__name__)
 app.debug=True
 
-app.secret_key = 'k4hp8ri1ng$@nbwqk+(fhdshgn9sR~XHH!jmN]LWX/,?RT'
+app.secret_key = 'k4hp8ri1ng$@nbwqk+(fhdshgn9sR~XHH!jmN]LWX/,?RT'# generate secret key refer to http://flask.pocoo.org/docs/0.10/quickstart/#sessions
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://%s:%s@%s:%s/%s?charset=utf8' % (MYSQL_USER,MYSQL_PASS,MYSQL_HOST_M,MYSQL_PORT,MYSQL_DB)
 
 class nullpool_SQLAlchemy(SQLAlchemy):
