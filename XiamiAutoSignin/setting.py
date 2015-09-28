@@ -2,7 +2,7 @@
 import sae.const
 
 #主页
-BASE_URL = 'http://xiamias.sinaapp.com/' #change it to your own url
+BASE_URL = 'http://xiamichecker.sinaapp.com/' #change it to your own url
 
 #网站名称
 SITE_TITLE = u'虾米自动签到'
